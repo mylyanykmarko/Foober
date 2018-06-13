@@ -1,10 +1,14 @@
-import os
 
 #  Нашою структурою двних є sqlalchemy база даних
 #  В ній ми зберігаємо замовлення клієнтів
+#  Тут ми її створюємо
 
-class Config(object):
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "data.sqlite")
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from config import Config
+
+app = Flask(__name__)
+app.config.from_object(Config)
+db = SQLAlchemy(app)
+
+
